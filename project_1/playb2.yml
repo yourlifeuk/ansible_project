@@ -1,0 +1,51 @@
+---
+- name: get arp info
+  hosts: routers
+  gather_facts: false
+  connection: local
+
+  vars:
+   cli:
+     username: tech
+     password: cisco
+     transport: cli
+
+  tasks:
+   - name: enable CDP
+     ios_config:
+         lines:
+          - cdp run
+
+     notify: save config
+
+  handlers:
+   - name: save config
+     ios_command:
+       commands: wr
+
+   - debug: var=print_output.stdout_lines
+
+- name: get arp info
+  hosts: switches
+  gather_facts: false
+
+  tasks:
+   - name: enable CDP
+     telnet:
+       user: tech
+       password: cisco
+       login_prompt: "Username: "
+       prompts:
+         - "[>|#]"
+       command:
+         - terminal length 0
+         - configure term
+         - cdp run
+
+
+     register: result
+
+   - debug: 
+        msg: "{{ result  }}"
+
+

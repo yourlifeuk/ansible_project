@@ -1,0 +1,11 @@
+ansible -m ping all -i hosts -c local
+
+ansbile-inventory --list
+
+ansible-playbook playb.yml 
+
+ansible-playbook playb2.yml 
+
+ansible-playbook playb3.yml
+
+

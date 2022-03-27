@@ -1,0 +1,7 @@
+ansible all -i ./hosts -m raw -a "show version" -u tech -k
+
+ansible-playbook playb.yml -u tech -k
+
+ansible-playbook playb2.yml -u tech -k
+
+

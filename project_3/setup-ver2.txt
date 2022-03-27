@@ -1,0 +1,30 @@
+/etc/ansible/hosts (File)
+[routers]
+R2 ansible_host=192.168.1.249
+R3 ansible_host=192.168.1.252
+R4 ansible_host=172.16.0.1
+
+[switches]
+SW1 ansible_host=192.168.253
+
+/etc/ansible/ansbile.cfg (File)
+[defaults]
+hostfile = /etc/ansible/hosts
+host_key_checking = false
+timeout = 5
+stdout_callback = yaml
+bin_ansible_callbacks = True
+
+/etc/ansbiel/group_vars/routers.yml (File)
+---
+
+ansible_ssh_user: tech
+ansible_ssh_pass: cisco
+ansibel_network_os: ios
+
+/etc/ansbiel/group_vars/switches.yml (File)
+---
+
+ansible_user: tech
+ansible_pass: cisco
+ansibel_network_os: ios

@@ -1,0 +1,80 @@
+R1
+username tech pr 15 pass cisco
+
+ip domain-nam ccnp
+
+crypto key gen rsa
+1024
+
+ip ssh ver 2
+
+
+line vty 0 4
+login local
+transport input ssh
+
+exit
+
+
+hostname R1
+
+end
+wr
+
+#####################################################################
+
+Other routers
+username tech pr 15 pass cisco
+
+ip domain-nam ccnp
+
+crypto key gen rsa
+1024
+
+ip ssh ver 2
+
+
+line vty 0 4
+login local
+transport input ssh
+
+exit
+
+in f0/0
+ip add 192.168.37.254 255.255.255.0
+no shu
+exit
+
+hostname R1
+
+end
+wr
+
+#####################################################################
+
+
+SW1
+username tech pr 15 pass cisco
+
+line vty 0 4
+login local
+transport input all
+
+exit
+
+in ran e0/0-3
+switch trunk en dot
+switch mode trunk
+exit
+
+
+hostname SW1
+
+in vlan 1
+ip add 192.168.137.253 255.255.255.0
+no shu
+
+end
+wr
+
+#####################################################################

@@ -1,0 +1,41 @@
+---
+- name: get arp info
+  hosts: switches
+  gather_facts: false
+
+  tasks:
+   - name: create vlan
+     telnet:
+       user: tech
+       password: cisco
+       login_prompt: "Username: "
+       prompts:
+         - "[>|#]"
+       command:
+         - terminal length 0
+         - configure term
+         - vtp domain 
+         - vlan 10
+         - name sales
+         - end
+
+
+     register: result
+
+   - debug: 
+        msg: "{{ result  }}"
+
+- name: get arp info
+  hosts: all
+  gather_facts: false
+
+
+  tasks:
+   - name: show ip interfaces
+     raw: "show ip interfaces brief"
+
+
+     register: print_output
+
+
+   - debug: var=print_output.stdout_lines

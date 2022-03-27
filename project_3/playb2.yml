@@ -1,0 +1,27 @@
+---
+- name: get arp info
+  hosts: all
+  gather_facts: false
+  connection: local
+
+  vars:
+   cli:
+     username: tech
+     password: cisco
+     transport: cli
+
+  tasks:
+   - name: enable CDP
+     ios_config:
+         lines:
+          - cdp run
+
+     notify: save config
+
+  handlers:
+   - name: save config
+     ios_command:
+       commands: wr
+blue
+
+   - debug: var=print_output.stdout_lines

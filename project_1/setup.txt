@@ -1,0 +1,28 @@
+/etc/hosts (Files)
+192.168.1.252 R3
+192.168.1.253 SW1
+192.168.1.249 R2
+172.16.0.1 R4
+
+
+#for GNS3 Linux can update and install sshpass
+91.189.88.152 archive.ubuntu.com
+91.189.91.38 security.ubuntu.com
+91.189.95.85 ppa.launchpad.net
+151.101.62.49 apt.releases.hashicorp.com
+
+
+/etc/ansible/hosts (Files)
+[Router]
+R2
+R3
+R4
+
+[Switch]
+SW1
+
+/etc/ansible/ansbile.cfg (Files)
+[defaults]
+hostfile = ./hosts
+host_key_checkign = false
+timeout = 5

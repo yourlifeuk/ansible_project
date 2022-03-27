@@ -1,0 +1,26 @@
+---
+- name: OSPF
+  hosts: routers
+  gather_facts: false
+  connection: local
+
+  vars:
+   cli:
+     username: tech
+     password: cisco
+     transport: cli
+
+  tasks:
+   - name: enable OSPF
+     ios_config:
+         lines:
+          - router ospf 1
+          - network 0.0.0.0 0.0.0.0 area 0
+          - end
+
+     notify: save config
+
+  handlers:
+   - name: save config
+     ios_command:
+       commands: wr
