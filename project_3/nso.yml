@@ -1,5 +1,10 @@
 ---
+- name: config
+  hosts: all
+  connection: ansible.netcommon.network_cli
+  gather_facts: false
+  
  tasks:
- - name: Configure Prefix-Set
-   iosxr_config:
-   src: iosxr_prefix_set.cfg
+  - name: Configure Prefix-Set
+    iosxr_config:
+    src: iosxr_prefix_set.cfg
