@@ -3,11 +3,6 @@
   hosts: all
   gather_facts: false
 
-- name: get arp info
-  hosts: all
-  gather_facts: false
-
-
   tasks:
    - name: show ip interfaces
      raw: "show ip interfaces brief"
@@ -17,3 +12,8 @@
 
 
    - debug: var=print_output.stdout_lines
+
+   - name: run the command 'show version'
+     raw: "show version | in up"
+
+     register: print_ouput
