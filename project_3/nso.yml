@@ -3,28 +3,6 @@
   hosts: all
   gather_facts: false
 
-  tasks:
-   - name: create vlan
-     telnet:
-       user: tech
-       password: cisco
-       login_prompt: "Username: "
-       prompts:
-         - "[>|#]"
-       command:
-         - terminal length 0
-         - configure term
-         - vtp domain 
-         - vlan 10
-         - name sales
-         - end
-
-
-     register: result
-
-   - debug: 
-        msg: "{{ result  }}"
-
 - name: get arp info
   hosts: all
   gather_facts: false
