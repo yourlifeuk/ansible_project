@@ -1,29 +1,27 @@
 ---
-- name: get arp info
+- name: Show examples
   hosts: all
-  gather_facts: false
+  gather_facts: no
 
   tasks:
-   - name: show ip interfaces
-     raw: "show ip interfaces brief"
-     register: out
+  - name: GATHERING FACTS
+    ios_facts:
+      gather_subset: hardware
 
-   - debug: var=out.stdout_lines
-    
-   - name: run show version
-     ios_command:
-       commands: show version
-     register: version
+  - name: run show version
+    ios_command:
+      commands: show version
+    register: version
   
-   - name: display version
-     debug:
-       var: version["stdout_lines"][0]
+  - name: display version
+    debug:
+      var: version["stdout_lines"][0]
 
-   - name: run show ip int brief
-     ios_command:
-       commands: show ip interface brief
-     register: interfaces
+  - name: run show ip int brief
+    ios_command:
+      commands: show ip interface brief
+    register: interfaces
 
-   - name: display interfaces
-     debug:
-       var: interfaces["stdout_lines"][0]
+  - name: display interfaces
+    debug:
+      var: interfaces["stdout_lines"][0]
