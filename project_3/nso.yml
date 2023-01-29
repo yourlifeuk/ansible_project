@@ -2,6 +2,14 @@
 - name: Show examples
   hosts: all
   gather_facts: no
+  
+  
+  vars: # for execution environment
+  
+    ansible_connection: ansible.netcommon.network_cli
+    ansible_network_os: cisco.ios.ios
+    ansible_become: yes
+    ansible_become_method: enable
 
   tasks:
   - name: GATHERING FACTS
