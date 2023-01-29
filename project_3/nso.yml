@@ -2,22 +2,15 @@
 - name: Sample IOS config for Ansible 2.5+
   hosts: all
   gather_facts: no
-  vars_prompt:
-    - name: loopback_num
-      prompt: "What Loopback Number to Configure?"
-      private: no
-    - name: loopback_ip
-      prompt: "What IP address to use? Example 192.168.1.1/32"
-      private: no
 
   tasks:
 
-  - name: Create loopback {{loopback_num}}
+  - name: Create loopback 20
     ios_interface:
-      name: Loopback{{loopback_num}}
+      name: Loopback 20
       enabled: True
       description: Created with Ansible
   - name: Assign IP to loopback
     ios_l3_interface:
-      name: Loopback{{loopback_num}}
-      ipv4: "{{loopback_ip}}"
+      name: Loopback 20
+      ipv4: "192.168.25.1/24"
