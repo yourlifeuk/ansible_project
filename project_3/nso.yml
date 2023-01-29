@@ -6,12 +6,11 @@
   tasks:
    - name: show ip interfaces
      raw: "show ip interfaces brief"
-      register: out
+     register: out
 
-    - debug: var=out.stdout_lines
+   - debug: var=out.stdout_lines
     
    - name: run the command 'show version'
      raw: "show version | in up"
-      register: out
-
-    - debug: var=out.stdout_lines
+     register: out
+   - debug: var=out.stdout_lines
