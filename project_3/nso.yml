@@ -1,35 +1,23 @@
 ---
-- name: Show examples
+- name: Sample IOS config for Ansible 2.5+
   hosts: all
   gather_facts: no
-  
-  
-  vars: # for execution environment
-  
-    ansible_connection: ansible.netcommon.network_cli
-    ansible_network_os: cisco.ios.ios
-    ansible_become: yes
-    ansible_become_method: enable
+  vars_prompt:
+    - name: loopback_num
+      prompt: "What Loopback Number to Configure?"
+      private: no
+    - name: loopback_ip
+      prompt: "What IP address to use? Example 192.168.1.1/32"
+      private: no
 
   tasks:
-  - name: GATHERING FACTS
-    ios_facts:
-      gather_subset: hardware
 
-  - name: run show version
-    ios_command:
-      commands: show version
-    register: version
-  
-  - name: display version
-    debug:
-      var: version["stdout_lines"][0]
-
-  - name: run show ip int brief
-    ios_command:
-      commands: show ip interface brief
-    register: interfaces
-
-  - name: display interfaces
-    debug:
-      var: interfaces["stdout_lines"][0]
+  - name: Create loopback {{loopback_num}}
+    ios_interface:
+      name: Loopback{{loopback_num}}
+      enabled: True
+      description: Created with Ansible
+  - name: Assign IP to loopback
+    ios_l3_interface:
+      name: Loopback{{loopback_num}}
+      ipv4: "{{loopback_ip}}"
