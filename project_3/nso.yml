@@ -2,17 +2,23 @@
 - name: get arp info
   hosts: all
   gather_facts: false
+  ansible_port: 8181
 
   tasks:
    - name: show ip interfaces
      raw: "show ip interfaces brief"
 
      register: print_output
+   
+   - name: print output
+      debug:
+        var: print_output.stdout_lines
 
-   - debug: var=print_output.stdout_lines
 
    - name: run the command 'show version'
      raw: "show version | in up"
 
      register: print_ouput
-   - debug: var=print_output.stdout_lines
+   - name: print output
+      debug:
+        var: print_output.stdout_lines
