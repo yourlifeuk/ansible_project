@@ -9,13 +9,10 @@
 
      register: print_output
 
-     - debug: 
-        var: print_output.stdout_lines
+   - debug: var=print_output.stdout_lines
 
    - name: run the command 'show version'
      raw: "show version | in up"
 
      register: print_ouput
-
-    - debug: 
-        var: print_output.stdout_lines
+   - debug: var=print_output.stdout_lines
