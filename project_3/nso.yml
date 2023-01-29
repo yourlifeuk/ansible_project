@@ -11,6 +11,10 @@
    - debug: var=out.stdout_lines
     
    - name: run the command 'show version'
-     raw: "show version | in up"
-     register: out
-   - debug: var=out.stdout_lines
+     cisco.ios.ios_command:
+      commands:
+      - show version
+      - show interfaces
+      wait_for:
+      - result[0] contains IOS
+      - result[1] contains Loopback0
