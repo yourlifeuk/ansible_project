@@ -9,7 +9,7 @@
 
      register: print_output
 
-     - debug: 
+   - debug: 
         var: print_output.stdout_lines
 
    - name: run the command 'show version'
@@ -17,5 +17,5 @@
 
      register: print_ouput
 
-    - debug: 
+   - debug: 
         var: print_output.stdout_lines
